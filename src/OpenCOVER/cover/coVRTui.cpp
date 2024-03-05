@@ -110,6 +110,8 @@ coVRTui::coVRTui()
 
 #endif
 
+    zoomFactorLabel = new coTUILabel("ZoomFactor", bottomContainer->getID());
+    zoomFactorEdit = new coTUIEditFloatField("ZoomFactorE", bottomContainer->getID());
     speedLabel = new coTUILabel("Navigation speed", bottomContainer->getID());
     NavSpeed = new coTUIFloatSlider("NavSpeed", bottomContainer->getID());
     viewerLabel = new coTUILabel("Viewer position", bottomContainer->getID());
@@ -223,16 +225,20 @@ coVRTui::coVRTui()
     ScaleSlider->setPos(1, 4);
     SceneUnit->setPos(3, 4);
 
-    FPSLabel->setPos(0, 11);
-    CFPSLabel->setPos(1, 11);
-    CFPS->setPos(2, 11);
+    zoomFactorLabel->setPos(0,11);
+    zoomFactorEdit->setPos(1,11);
+    zoomFactorEdit->setValue(1.1f);
+
+    FPSLabel->setPos(0, 12);
+    CFPSLabel->setPos(1, 12);
+    CFPS->setPos(2, 12);
     CFPS->setValue(0.0);
 
-    backgroundLabel->setPos(0, 12);
-    backgroundColor->setPos(1, 12);
+    backgroundLabel->setPos(0, 13);
+    backgroundColor->setPos(1, 13);
     backgroundColor->setColor(0, 0, 0, 1);
-    LODScaleLabel->setPos(2, 12);
-    LODScaleEdit->setPos(3, 12);
+    LODScaleLabel->setPos(2, 13);
+    LODScaleEdit->setPos(3, 13);
 
     Quit->setPos(2, 0);
 #ifndef NOFB
@@ -312,6 +318,8 @@ coVRTui::~coVRTui()
     delete FlipStereo;
     delete DisableIntersection;
     delete testImage;
+    delete zoomFactorLabel;
+    delete zoomFactorEdit;
     delete speedLabel;
     delete NavSpeed;
     delete ScaleSlider;
@@ -1381,6 +1389,11 @@ void coVRTui::makeRot(float heading, float pitch, float roll, int headingBool, i
     cover->getObjectsXform()->setMatrix(doRot);
     coVRCollaboration::instance()->SyncXform();
 }
+
+// float getZoomFactor() {
+//     return zoomFactorEdit->getValue();
+// }
+
 
 coTUIFileBrowserButton *coVRTui::getExtFB()
 {

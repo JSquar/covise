@@ -293,6 +293,7 @@ coVRConfig::coVRConfig()
 
     m_LODScale = coCoviseConfig::getFloat("COVER.LODScale", 1.0);
     m_worldAngle = coCoviseConfig::getFloat("COVER.WorldAngle", 0.);
+    m_zoomFactor = coCoviseConfig::getFloat("COVER.ZoomFactor", 1.1f);
 
     drawStatistics = coCoviseConfig::isOn("COVER.Statistics", false) ? coVRStatsDisplay::VIEWER_STATS : coVRStatsDisplay::NO_STATS;
     HMDMode = coCoviseConfig::isOn("mode", std::string("COVER.HMD"), false);
@@ -813,6 +814,11 @@ bool coVRConfig::useVBOs() const
 float coVRConfig::worldAngle() const
 {
     return m_worldAngle;
+}
+
+float coVRConfig::zoomFactor() const
+{
+    return m_zoomFactor;
 }
 
 int coVRConfig::lockToCPU() const

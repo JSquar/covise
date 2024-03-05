@@ -159,6 +159,7 @@ public:
 
     void getTmpFileName(std::string url);
     coTUIFileBrowserButton *getExtFB();
+    float getZoomFactor();
 
     BinList *binList;
 
@@ -205,8 +206,10 @@ private:
     coTUILabel *speedLabel;
     coTUILabel *scaleLabel;
     coTUILabel *viewerLabel;
+    coTUILabel *zoomFactorLabel;
     coTUILabel *FPSLabel;
     coTUILabel *CFPSLabel;
+    coTUIEditFloatField *zoomFactorEdit;
     coTUIEditFloatField *CFPS;
     coTUIFloatSlider *NavSpeed;
     coTUIFloatSlider *ScaleSlider;

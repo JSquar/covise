@@ -454,7 +454,8 @@ void coVRNavigationManager::initMenu()
     scaleUpAction_->setCallback([this, protectNav]() {
         protectNav([this]() {
             startMouseNav();
-            doMouseScale(cover->getScale() * 1.1f);
+            // doMouseScale(cover->getScale() * 1.1f);
+            doMouseScale(cover->getScale() * coVRConfig::instance()->zoomFactor());
             stopMouseNav();
         });
     });
@@ -468,7 +469,8 @@ void coVRNavigationManager::initMenu()
     scaleDownAction_->setCallback([this, protectNav]() {
         protectNav([this]() {
             startMouseNav();
-            doMouseScale(cover->getScale() / 1.1f);
+            // doMouseScale(cover->getScale() / 1.1f);
+            doMouseScale(cover->getScale() / coVRConfig::instance()->zoomFactor());
             stopMouseNav();
         });
     });

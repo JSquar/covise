@@ -356,6 +356,8 @@ public:
     // current configured angle of workbench
     float worldAngle() const;
 
+    float zoomFactor() const;
+
     //! return true if the position of the tracked head is not taken into account
     bool frozen() const;
 
@@ -476,6 +478,7 @@ private:
     float m_farClip;
     float m_LODScale;
     float m_worldAngle;
+    float m_zoomFactor;
 
     bool m_stereoState;
     int m_stereoMode;
