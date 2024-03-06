@@ -204,12 +204,14 @@ private:
     coTUIButton *ViewAll;
     coTUILabel *speedLabel;
     coTUILabel *scaleLabel;
+    coTUILabel *scaleSpeedLabel;
     coTUILabel *viewerLabel;
     coTUILabel *FPSLabel;
     coTUILabel *CFPSLabel;
     coTUIEditFloatField *CFPS;
     coTUIFloatSlider *NavSpeed;
     coTUIFloatSlider *ScaleSlider;
+    coTUIFloatSlider *scaleSpeedSlider;
     coTUIComboBox *SceneUnit;
     coTUIColorButton *backgroundColor;
     coTUILabel *backgroundLabel;

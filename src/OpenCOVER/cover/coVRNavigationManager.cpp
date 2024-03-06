@@ -159,6 +159,7 @@ coVRNavigationManager::coVRNavigationManager()
     , joystickActive(false)
     , navExp(2.0)
     , driveSpeed(1.0)
+    , scaleSpeed(1.1f)
     , jump(true)
     , snapping(false)
     , snappingD(false)
@@ -448,13 +449,27 @@ void coVRNavigationManager::initMenu()
         });
     });
 
+    scaleSpeedSlider_ = new ui::Slider(navMenu_, "scaleSpeedFactor");
+    scaleSpeedSlider_->setVisible(false, ui::View::VR);
+    scaleSpeedSlider_->setText("Scale speed");
+    scaleSpeedSlider_->setBounds(0, 2);
+    // scalespeedSlider_->setScale(ui::Slider::Logarithmic);
+    scaleSpeedSlider_->setValue(getScaleSpeed());
+    // scaleSpeedSlider_->setCallback([this, protectNav](double val, bool released) {
+    //     protectNav([this, val]() {
+    //         startMouseNav();
+    //         doMouseScale(val);
+    //         stopMouseNav();
+    //     });
+    // });
+
     scaleUpAction_ = new ui::Action(navMenu_, "ScaleUp");
     scaleUpAction_->setText("Scale up");
     scaleUpAction_->setVisible(false);
     scaleUpAction_->setCallback([this, protectNav]() {
         protectNav([this]() {
             startMouseNav();
-            doMouseScale(cover->getScale() * 1.1f);
+            doMouseScale(cover->getScale() * getScaleSpeed());
             stopMouseNav();
         });
     });
@@ -468,7 +483,7 @@ void coVRNavigationManager::initMenu()
     scaleDownAction_->setCallback([this, protectNav]() {
         protectNav([this]() {
             startMouseNav();
-            doMouseScale(cover->getScale() / 1.1f);
+            doMouseScale(cover->getScale() / getScaleSpeed());
             stopMouseNav();
         });
     });
@@ -839,6 +854,7 @@ coVRNavigationManager::update()
         fprintf(stderr, "coVRNavigationManager::update\n");
 
     scaleSlider_->setValue(cover->getScale());
+    scaleSpeedSlider_->setValue(getScaleSpeed());
 
     coPointerButton *button = cover->getPointerButton();
     oldHandDir = handDir;
@@ -3045,6 +3061,17 @@ void coVRNavigationManager::stopSelectInteract(bool mouse)
 void coVRNavigationManager::wasJumping()
 {
     jump = true;
+}
+
+void coVRNavigationManager::setScaleSpeed(float speed)
+{
+    scaleSpeed = speed;
+    scaleSpeedSlider_->setValue(speed);
+}
+
+float coVRNavigationManager::getScaleSpeed()
+{
+    return scaleSpeed;
 }
 
 void coVRNavigationManager::setDriveSpeed(float speed)

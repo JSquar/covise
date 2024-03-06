@@ -149,6 +149,8 @@ public:
     void wasJumping();
     float getDriveSpeed();
     void setDriveSpeed(float speed);
+    float getScaleSpeed();
+    void setScaleSpeed(float speed);
     bool isSnapping() const;
     bool isDegreeSnapping() const;
     float snappingDegrees() const;
@@ -334,6 +336,7 @@ private:
     float stepSize;
 
     float driveSpeed;
+    float scaleSpeed;
 
     void init();
     bool jump; // set to true if a jump has been performed to disable collision detection
@@ -363,6 +366,7 @@ private:
     ui::Slider *driveSpeedSlider_=nullptr;
     ui::Action *scaleUpAction_=nullptr, *scaleDownAction_=nullptr;
     ui::Slider *scaleSlider_=nullptr;
+    ui::Slider *scaleSpeedSlider_=nullptr;
     ui::Action *centerViewButton = nullptr;
     ui::Action *printObjectTransform = nullptr;
     osg::Vec3 rotPointVec;

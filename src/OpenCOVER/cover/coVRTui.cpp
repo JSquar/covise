@@ -96,6 +96,8 @@ coVRTui::coVRTui()
     Menu = new coTUIToggleButton("Hide menu", topContainer->getID());
     scaleLabel = new coTUILabel("Scale factor", topContainer->getID());
     ScaleSlider = new coTUIFloatSlider("ScaleFactor", topContainer->getID());
+    scaleSpeedLabel = new coTUILabel("Scale Speed", topContainer->getID());
+    scaleSpeedSlider = new coTUIFloatSlider("ScaleSpeed", topContainer->getID());
     SceneUnit = new coTUIComboBox("SceneUni", topContainer->getID());
     Menu->setState(false);
     debugLabel = new coTUILabel("Debug level", topContainer->getID());
@@ -148,6 +150,7 @@ coVRTui::coVRTui()
     DisableIntersection->setEventListener(this);
     testImage->setEventListener(this);
     ScaleSlider->setEventListener(this);
+    scaleSpeedSlider->setEventListener(this);
     SceneUnit->setEventListener(this);
     Quit->setEventListener(this);
     Freeze->setEventListener(this);
@@ -180,7 +183,11 @@ coVRTui::coVRTui()
     ScaleSlider->setMax(1e+5);
     ScaleSlider->setValue(1.);
     ScaleSlider->setLogarithmic(true);
-
+    
+    scaleSpeedSlider->setMin(0);
+    scaleSpeedSlider->setMax(2);
+    scaleSpeedSlider->setValue(1.1f);
+    
     for(auto unit : LengthUnitNames)
         SceneUnit->addEntry(unit);
     SceneUnit->setSelectedEntry((int)cover->getSceneUnit());
@@ -209,6 +216,8 @@ coVRTui::coVRTui()
 
     speedLabel->setPos(0, 10);
     NavSpeed->setPos(1, 10);
+    scaleSpeedLabel->setPos(0, 11);
+    scaleSpeedSlider->setPos(1, 11);
 
     viewerLabel->setPos(0, 7);
     posX->setPos(0, 8);
@@ -223,16 +232,16 @@ coVRTui::coVRTui()
     ScaleSlider->setPos(1, 4);
     SceneUnit->setPos(3, 4);
 
-    FPSLabel->setPos(0, 11);
-    CFPSLabel->setPos(1, 11);
-    CFPS->setPos(2, 11);
+    FPSLabel->setPos(0, 12);
+    CFPSLabel->setPos(1, 12);
+    CFPS->setPos(2, 12);
     CFPS->setValue(0.0);
 
-    backgroundLabel->setPos(0, 12);
-    backgroundColor->setPos(1, 12);
+    backgroundLabel->setPos(0, 13);
+    backgroundColor->setPos(1, 13);
     backgroundColor->setColor(0, 0, 0, 1);
-    LODScaleLabel->setPos(2, 12);
-    LODScaleEdit->setPos(3, 12);
+    LODScaleLabel->setPos(2, 13);
+    LODScaleEdit->setPos(3, 13);
 
     Quit->setPos(2, 0);
 #ifndef NOFB
@@ -315,6 +324,8 @@ coVRTui::~coVRTui()
     delete speedLabel;
     delete NavSpeed;
     delete ScaleSlider;
+    delete scaleSpeedSlider;
+    delete scaleSpeedLabel;
     delete coverTab;
     delete mainFolder;
     delete Quit;
